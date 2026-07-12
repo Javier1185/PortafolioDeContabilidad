@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentación del Estudiante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EDD9;
+    --paper-line:#D6C495;
+    --ink-dark:#2A1B0E;
+    --ink-dark-dim:#7D6A4C;
+    --brass:#CB9A2E;
+    --brass-bright:#A9791E;
+    --display:'Fraunces', serif;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    background:var(--paper);
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(203,154,46,0.06) 0px, rgba(203,154,46,0.06) 1px, transparent 1px, transparent 34px);
+    color:var(--ink-dark);
+    font-family:var(--sans);
+    min-height:100%;
+    display:flex; align-items:center; justify-content:center;
+    padding:40px 24px;
+  }
+
+  .wrap{ width:100%; max-width:640px; }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:2.5px; color:var(--brass-bright);
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .title{
+    font-family:var(--display); font-style:italic; font-weight:700; font-size:clamp(22px,3.6vw,28px);
+    color:var(--ink-dark); margin-bottom:28px;
+  }
+
+  .card{
+    display:flex; gap:28px; align-items:flex-start;
+    border:1.5px solid var(--paper-line); border-radius:8px;
+    padding:30px; background:rgba(255,255,255,0.28);
+    box-shadow:0 24px 50px -22px rgba(42,27,14,0.25);
+  }
+
+  .photo-slot{
+    flex-shrink:0;
+    width:150px; height:190px;
+    border-radius:16px;
+    border:2px dashed var(--paper-line);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    color:var(--ink-dark-dim); font-family:var(--mono); font-size:10px; line-height:1.5; padding:12px;
+    overflow:hidden;
+  }
+  .photo-slot img{ width:100%; height:100%; object-fit:cover; border-radius:14px; }
+
+  .bio{ flex:1; }
+  .bio-name{ font-family:var(--display); font-weight:600; font-size:19px; color:var(--ink-dark); margin-bottom:12px; }
+  .bio p{ font-size:14px; line-height:1.75; color:var(--ink-dark); }
+
+  .tags{ margin-top:20px; display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:var(--mono); font-size:10px; letter-spacing:.5px; color:var(--brass-bright);
+    border:1px solid var(--paper-line); border-radius:20px; padding:5px 12px;
+    text-transform:uppercase;
+  }
+
+  @media (max-width:520px){
+    .card{ flex-direction:column; align-items:center; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="eyebrow">Presentación</div>
+    <div class="title">Sobre el estudiante</div>
+
+    <div class="card">
+      <!--
+        Para poner tu foto:
+        reemplaza el <div class="photo-slot">...</div> de abajo por:
+        <div class="photo-slot"><img src="../files/mi-foto.jpg" alt="Javier Forchiney"></div>
+        y coloca el archivo de imagen en la carpeta files/ del proyecto.
+      -->
+      <div class="photo-slot"><img src="../files/Foto formalita.jpg" alt="Javier Forchiney"></div>
+
+      <div class="bio">
+        <div class="bio-name">Javier Forchiney</div>
+        <p>Soy Javier Forchiney, tengo 20 años. Terminé secundaria en el Colegio Elena Ch. de Pinate. En el bachiller de ciencias, también participé en el programa ¡Supérate! Fundación Provivienda, donde aprendí a programar, hablar inglés y muchos valores fundamentales, como son: Integridad, Liderazgo, Excelencia y Honestidad. Fui certificado de MOS Excel, JavaScript e Inglés con un nivel intermedio avanzado.</p>
+
+        <div class="tags">
+          <span class="tag">MOS Excel</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Inglés Intermedio-Avanzado</span>
+          <span class="tag">¡Supérate! Provivienda</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
