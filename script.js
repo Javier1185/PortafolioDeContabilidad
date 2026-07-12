@@ -80,24 +80,37 @@ const fsViewer = document.getElementById("fullscreen-viewer");
 const fsIframe = document.getElementById("fs-iframe");
 const fsFallback = document.getElementById("fs-fallback");
 const fsLoading = document.getElementById("fs-loading");
+const fsLoadingLink = document.getElementById("fs-loading-open-new");
 const fsTitle = document.getElementById("fs-title");
 const fsBackBtn = document.getElementById("fs-back-btn");
 
 let fsLoadingTimeout = null;
+let fsLoadingLinkTimeout = null;
+let fsHonorLoadEvent = true;
 
-// Deja de mostrar "cargando" apenas el iframe reporta su primer load
-fsIframe.addEventListener("load", () => hideFsLoading());
+// El evento "load" del iframe solo es confiable para PDFs y páginas propias (mismo origen).
+// Para Office Online (Word/Excel/PPT) el iframe "carga" su cascarón en segundos, pero el
+// contenido real tarda mucho más por dentro — así que ahí ignoramos ese evento.
+fsIframe.addEventListener("load", () => {
+  if(fsHonorLoadEvent) hideFsLoading();
+});
 
-function showFsLoading(){
+function showFsLoading(url, { honorLoad = true, backupMs = 15000 } = {}){
+  fsHonorLoadEvent = honorLoad;
   fsLoading.classList.remove("hidden");
+  fsLoadingLink.href = url || "#";
+  fsLoadingLink.classList.add("hidden");
   clearTimeout(fsLoadingTimeout);
-  // Respaldo: si el visor nunca dispara "load" (pasa a veces con Office Online),
-  // igual quitamos el aviso después de un tiempo para no dejarlo pegado.
-  fsLoadingTimeout = setTimeout(hideFsLoading, 12000);
+  clearTimeout(fsLoadingLinkTimeout);
+  // A los 8s se ofrece abrir el archivo en una pestaña aparte, por si no quiere esperar
+  fsLoadingLinkTimeout = setTimeout(() => fsLoadingLink.classList.remove("hidden"), 8000);
+  // Respaldo: quita el aviso después de "backupMs" aunque nunca se detecte que terminó
+  fsLoadingTimeout = setTimeout(hideFsLoading, backupMs);
 }
 function hideFsLoading(){
   fsLoading.classList.add("hidden");
   clearTimeout(fsLoadingTimeout);
+  clearTimeout(fsLoadingLinkTimeout);
 }
 
 // Uso simple (una página HTML propia, ej. Portada / Conclusión)
@@ -106,10 +119,10 @@ function openFullscreenPage(title, url){
 }
 
 // Uso general: pasa "url" para mostrar un iframe, o "fallbackHTML" para mostrar un aviso en su lugar
-function openFullscreenContent({ title, url, fallbackHTML }){
+function openFullscreenContent({ title, url, fallbackHTML, honorLoad = true, backupMs = 15000 }){
   fsTitle.textContent = title;
   if(url){
-    showFsLoading();
+    showFsLoading(url, { honorLoad, backupMs });
     fsIframe.src = url;
     fsIframe.classList.remove("hidden");
     fsFallback.classList.add("hidden");
@@ -483,7 +496,7 @@ function openFileViewer(path, index){
   const absoluteURL = new URL(encodedPath, window.location.href).href;
 
   if(type === "pdf"){
-    openFullscreenContent({ title: item.label, url: encodedPath });
+    openFullscreenContent({ title: item.label, url: encodedPath, honorLoad: true, backupMs: 15000 });
 
   } else if(["word","ppt","excel"].includes(type)){
     const isLocal = ["localhost","127.0.0.1",""].includes(window.location.hostname);
@@ -497,7 +510,10 @@ function openFileViewer(path, index){
       `});
     } else {
       const viewerURL = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(absoluteURL)}`;
-      openFullscreenContent({ title: item.label, url: viewerURL });
+      // El iframe del visor de Microsoft "carga" en segundos, pero el contenido real
+      // tarda más por dentro — sobre todo Excel — así que no confiamos en el evento load.
+      const backupMs = type === "excel" ? 60000 : 20000;
+      openFullscreenContent({ title: item.label, url: viewerURL, honorLoad: false, backupMs });
     }
 
   } else {

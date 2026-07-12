@@ -60,11 +60,11 @@
     <button id="about-close">Cerrar</button>
   </div>
 </div>
-
+ 
 <!-- ===== VISOR DE PANTALLA COMPLETA (Portada, Presentación, Conclusión) ===== -->
 <div id="fullscreen-viewer" class="hidden">
   <div class="fs-topbar">
-    <button id="fs-back-btn" class="fs-back-btn" type="button">Regresar</button>
+    <button id="fs-back-btn" class="fs-back-btn" type="button">← Regresar</button>
     <div class="fs-title" id="fs-title"></div>
   </div>
   <div class="fs-body">
@@ -73,11 +73,12 @@
     <div class="fs-loading hidden" id="fs-loading">
       <div class="fs-spinner"></div>
       <div class="fs-loading-text">El archivo se está cargando…</div>
-      <div class="fs-loading-note">Puede tardar unos segundos, sobre todo en archivos grandes</div>
+      <div class="fs-loading-note">Los archivos de Excel pueden tardar hasta cerca de un minuto</div>
+      <a href="#" target="_blank" rel="noopener" class="fs-loading-link hidden" id="fs-loading-open-new">Abrir en una pestaña nueva →</a>
     </div>
   </div>
 </div>
-
+ 
 <script src="data.js"></script>
 <script src="script.js"></script>
 </body>
