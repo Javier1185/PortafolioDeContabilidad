@@ -79,8 +79,26 @@ const desktop = document.getElementById("desktop");
 const fsViewer = document.getElementById("fullscreen-viewer");
 const fsIframe = document.getElementById("fs-iframe");
 const fsFallback = document.getElementById("fs-fallback");
+const fsLoading = document.getElementById("fs-loading");
 const fsTitle = document.getElementById("fs-title");
 const fsBackBtn = document.getElementById("fs-back-btn");
+
+let fsLoadingTimeout = null;
+
+// Deja de mostrar "cargando" apenas el iframe reporta su primer load
+fsIframe.addEventListener("load", () => hideFsLoading());
+
+function showFsLoading(){
+  fsLoading.classList.remove("hidden");
+  clearTimeout(fsLoadingTimeout);
+  // Respaldo: si el visor nunca dispara "load" (pasa a veces con Office Online),
+  // igual quitamos el aviso después de un tiempo para no dejarlo pegado.
+  fsLoadingTimeout = setTimeout(hideFsLoading, 12000);
+}
+function hideFsLoading(){
+  fsLoading.classList.add("hidden");
+  clearTimeout(fsLoadingTimeout);
+}
 
 // Uso simple (una página HTML propia, ej. Portada / Conclusión)
 function openFullscreenPage(title, url){
@@ -91,11 +109,13 @@ function openFullscreenPage(title, url){
 function openFullscreenContent({ title, url, fallbackHTML }){
   fsTitle.textContent = title;
   if(url){
+    showFsLoading();
     fsIframe.src = url;
     fsIframe.classList.remove("hidden");
     fsFallback.classList.add("hidden");
     fsFallback.innerHTML = "";
   } else {
+    hideFsLoading();
     fsIframe.src = "about:blank";
     fsIframe.classList.add("hidden");
     fsFallback.innerHTML = fallbackHTML || "";
@@ -108,6 +128,7 @@ function closeFullscreenPage(){
   fsViewer.classList.add("hidden");
   fsIframe.src = "about:blank";
   fsFallback.innerHTML = "";
+  hideFsLoading();
 }
 fsBackBtn.addEventListener("click", closeFullscreenPage);
 

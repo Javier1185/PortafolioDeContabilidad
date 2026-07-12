@@ -19,7 +19,6 @@
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>
   <div class="welcome-content">
-   
     <div class="welcome-eyebrow">PORTAFOLIO</div>
     <h1 class="welcome-title">Bienvenida al portafolio de<br><span>Javier Forchiney</span></h1>
     <p class="welcome-sub">Contabilidad General · Grupo 1GS131</p>
@@ -65,12 +64,17 @@
 <!-- ===== VISOR DE PANTALLA COMPLETA (Portada, Presentación, Conclusión) ===== -->
 <div id="fullscreen-viewer" class="hidden">
   <div class="fs-topbar">
-    <button id="fs-back-btn" class="fs-back-btn" type="button">← Regresar</button>
+    <button id="fs-back-btn" class="fs-back-btn" type="button">Regresar</button>
     <div class="fs-title" id="fs-title"></div>
   </div>
   <div class="fs-body">
     <iframe id="fs-iframe" title="Documento"></iframe>
     <div class="fs-fallback hidden" id="fs-fallback"></div>
+    <div class="fs-loading hidden" id="fs-loading">
+      <div class="fs-spinner"></div>
+      <div class="fs-loading-text">El archivo se está cargando…</div>
+      <div class="fs-loading-note">Puede tardar unos segundos, sobre todo en archivos grandes</div>
+    </div>
   </div>
 </div>
 
