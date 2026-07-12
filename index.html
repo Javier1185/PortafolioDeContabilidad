@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio de Contabilidad · Javier Forchiney</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== PANTALLA DE BIENVENIDA ===== -->
+<div id="welcome-screen">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="welcome-content">
+    <div class="welcome-eyebrow">PORTAFOLIO_OS</div>
+    <h1 class="welcome-title">Bienvenida al portafolio de<br><span>Javier Forchiney</span></h1>
+    <p class="welcome-sub">Contabilidad General · Curso I-2026</p>
+    <button id="open-btn" class="open-btn">Abrir el portafolio</button>
+  </div>
+</div>
+
+<!-- ===== ESCRITORIO ===== -->
+<div id="desktop" class="hidden">
+
+  <div class="orb orb-a"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="desktop-watermark">
+    <div class="wm-name">JAVIER FORCHINEY</div>
+    <div class="wm-role">Contabilidad General · Portafolio de Curso</div>
+  </div>
+
+  <div class="icons-grid" id="icons-grid">
+    <!-- Los íconos de carpetas se generan por JS a partir de FOLDERS -->
+  </div>
+
+  <div id="windows-container"></div>
+
+  <div class="taskbar">
+    <button class="start-btn" id="start-btn">
+      <span class="start-dot"></span> Portafolio
+    </button>
+    <div class="taskbar-open" id="taskbar-open"></div>
+    <div class="taskbar-clock" id="taskbar-clock">--:--</div>
+  </div>
+
+  <div class="about-panel" id="about-panel">
+    <h3>Cómo agregar tus archivos</h3>
+    <ol>
+      <li>Copia el documento real dentro de su carpeta en <code>files/</code></li>
+      <li>Abre <code>data.js</code> y registra el nombre exacto del archivo</li>
+      <li>Publica el sitio (GitHub Pages / Netlify) para que se pueda ver sin descargar</li>
+    </ol>
+    <p>Doble clic abre carpetas y archivos. Un clic en cualquier parte vacía del escritorio cierra las ventanas abiertas.</p>
+    <button id="about-close">Cerrar</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
