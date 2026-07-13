@@ -64,6 +64,11 @@ const FOLDERS = [
       { name: "PLANILLA DE PAGO (1).pdf", label: "Planilla de Pago" },
       { name: "EXPLICACIÓN- FORMATO PLANILLA QUINCENAL - 2026.xlsx", label: "Explicación - Formato Planilla Quincenal" },
       { name: "Practica EXAMEN FINAL DE CONTABILIDAD -2026.pdf", label: "Práctica Examen Final" },
+      { name: "PRÁCTICA EN CLASE  DIARIO, MAYOR Y BALANCE.pdf", label: "Práctica en Clase - Diario, Mayor y Balance" },
+      { name: "PRACTICA INDIVIDUAL ITBMS.pdf", label: "Práctica Individual - ITBMS" },
+      { name: "CLASIFICACION CUENTAS A Y B.xlsx", label: "Clasificación Cuentas A y B" },
+      { name: "ESTUDIANTES PROBLEMAS D-M Y BALANCE PRACTICA 1 Y 2 - copia.xlsx", label: "Práctica de Balance - Práctica 1 y 2" },
+      
     ]
   },
   {
